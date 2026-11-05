@@ -11,3 +11,26 @@ datasource db {
 }
 
 // Add your models below this line
+
+model Director {
+  id          Int    @id @default(autoincrement())
+  name        String
+  nationality String
+  film        Film[]
+}
+
+model Film {
+  id          Int      @id @default(autoincrement())
+  title       String
+  releaseYear Int
+  directorId  Int
+  director    Director @relation(fields: [directorId], references: [id])
+  actor       Actor[]
+}
+
+model Actor {
+  id        Int    @id @default(autoincrement())
+  name      String
+  birthYear Int
+  film      Film[]
+}
